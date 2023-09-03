@@ -1,22 +1,21 @@
 import React from 'react';
-import axios from 'axios';
-import  {useEffect, useState} from 'react';
 import { Row, Col } from 'react-bootstrap';
 import Product from '../components/Product';
+import Loader from '../components/Loader';
+import Message from '../components/Message';
+import { useGetProductsQuery } from '../slices/productsApiSlice';
 
 
 const HomeScreen = () => {
+  const {data: products, isLoading, error} = useGetProductsQuery();
 
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-      const fetchProducts = async () => {
-        const { data } = await axios.get('/api/products');
-        setProducts(data);
-      };
-      fetchProducts();
-  }, []);
   return (
+      <>
+      {isLoading ? (<Loader/>)
+      
+      : error ? (<Message variant='danger'>{error.error || error.data.message}</Message>): 
+
+      (
       <>
         <h1>Latest Products</h1>
         <Row>
@@ -27,8 +26,12 @@ const HomeScreen = () => {
             ))}
         </Row>
       </>
+      )
+      }
+        
+      </>
     
-  )
-}
+  );
+};
 
 export default HomeScreen
