@@ -1,0 +1,16 @@
+/* HomeScreen.css */
+.home-title {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.product-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.product-item {
+  width: 25%; /* Adjust as needed */
+  padding: 10px;
+  box-sizing: border-box;
+}
